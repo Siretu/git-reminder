@@ -19,15 +19,13 @@ def get_todays_events():
         if e["public"] and e["type"] == "PushEvent":
             date_string = e["created_at"]
             d = datetime.datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%SZ").date()
-            #print d
-            #print datetime.date.today()
             if d == datetime.date.today():
                 result.append(e)
     return result
 
 def main():
     events = get_todays_events()
-    print events
+    pprint.pprint(events)
     if events:
         os.system('espeak "Good job, %d commits so far today"' % len(events))
     else:
