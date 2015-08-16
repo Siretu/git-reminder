@@ -23,11 +23,15 @@ def get_todays_events():
                 result.append(e)
     return result
 
+def get_commits_from_event(event):
+    return len(e["payload"]["commits"])
+
 def main():
     events = get_todays_events()
     pprint.pprint(events)
     if events:
-        os.system('espeak "Good job, %d commits so far today"' % len(events))
+        commits = sum([get_commits_from_event(e) for e in events])
+        os.system('espeak "Good job, %d commits so far today"' % commits)
     else:
         os.system('espeak "Don\'t forget to commit"')
        
