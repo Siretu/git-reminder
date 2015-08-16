@@ -24,7 +24,7 @@ def get_todays_events():
     return result
 
 def get_commits_from_event(event):
-    return len(e["payload"]["commits"])
+    return len(event["payload"]["commits"])
 
 def main():
     events = get_todays_events()
