@@ -14,20 +14,25 @@ def get_events():
 
 def get_todays_events():
     events = get_events()
+    result = []
     for e in events:
         if e["public"] and e["type"] == "PushEvent":
             date_string = e["created_at"]
             d = datetime.datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%SZ").date()
-            print d
-            print datetime.date.today()
+            #print d
+            #print datetime.date.today()
             if d == datetime.date.today():
-                print d
+                result.append(e)
+    return result
 
 def main():
     events = get_todays_events()
-    if not events:
+    print events
+    if events:
+        os.system('espeak "Good job, %d commits so far today"' % len(events))
+    else:
         os.system('espeak "Don\'t forget to commit"')
-    
+       
 
 if __name__ == "__main__":
     main()
